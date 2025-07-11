@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFeedback", "SmartFeedback\SmartFeedback.csproj", "{B606B9D7-4812-4BA7-936A-2C9F51A3CDD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B606B9D7-4812-4BA7-936A-2C9F51A3CDD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B606B9D7-4812-4BA7-936A-2C9F51A3CDD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B606B9D7-4812-4BA7-936A-2C9F51A3CDD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B606B9D7-4812-4BA7-936A-2C9F51A3CDD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED083493-2966-4663-935E-6D0788C4E998}
+	EndGlobalSection
+EndGlobal
