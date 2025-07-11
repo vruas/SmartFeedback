@@ -19,8 +19,8 @@ namespace SmartFeedback.Services
         {
             Claim[] claims = new Claim[]
             {
-                new Claim(ClaimTypes.NameIdentifier, usuario.Id),
-                new Claim(ClaimTypes.Name, usuario.UserName),
+                new Claim("id", usuario.Id),
+                new Claim("username", usuario.UserName),
                 new Claim(ClaimTypes.Email, usuario.Email),
                 new Claim(ClaimTypes.DateOfBirth, usuario.DataNascimento.ToString("yyyy-MM-dd")),
                 new Claim("loginTimeStamp", DateTime.UtcNow.ToString())

@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using SmartFeedback.Authorization;
 using SmartFeedback.Data;
 using SmartFeedback.Models;
 using SmartFeedback.Services;
@@ -16,15 +18,18 @@ var connectionString = builder.Configuration.GetConnectionString("SmartFeedbackC
 builder.Services.AddDbContext<UsuarioDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 builder.Services
     .AddIdentity<Usuario, IdentityRole>()
     .AddEntityFrameworkStores<UsuarioDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<UsuarioService>();
-builder.Services.AddScoped<TokenService>();
+
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSingleton<IAuthorizationHandler, IdadeAuthorization>();
 
 
 builder.Services.AddControllers();
@@ -41,11 +46,20 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-        ValidateAudience = true,
-        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
         ClockSkew = TimeSpan.Zero,
     };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("IdadeMinima", policy =>
+        policy.Requirements.Add(new IdadeMinima(18)));
+});
+
+builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 
@@ -57,6 +71,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
