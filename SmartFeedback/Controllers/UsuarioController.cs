@@ -26,8 +26,8 @@ namespace SmartFeedback.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginUsuarioDto dto)
         {
-            await _usuarioService.Login(dto);
-            return Ok("Usuário logado com sucesso!");
+            var token = await _usuarioService.Login(dto);
+            return Ok(token);
         }
     }
 }
